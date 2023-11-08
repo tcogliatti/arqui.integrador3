@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tudai.tp3arqui.dto.requests.CarreraRequestDTO;
 import tudai.tp3arqui.dto.responses.CarreraInscriptosResponseDTO;
 import tudai.tp3arqui.dto.responses.CarreraResponseDTO;
+import tudai.tp3arqui.dto.responses.CarreraResponseReporteDTO;
 import tudai.tp3arqui.exceptions.NotFoundEntity;
 import tudai.tp3arqui.model.Carrera;
 import tudai.tp3arqui.repository.CarreraRepository;
@@ -43,11 +44,20 @@ public class CarreraService {
     public List<CarreraInscriptosResponseDTO> getCantInscriptosPorCarrera() {
         List<CarreraInscriptosResponseDTO> results = this.carreraRepository.findAllOrderDescByMatriculados().stream().map(CarreraInscriptosResponseDTO::new).toList();
         return  results;
-//        List<Object[]> results = this.carreraRepository.findAllOrderDescByMatriculados();
-//
-//        List<CarreraInscriptosResponseDTO> dtos = results.stream()
-//                .map(result -> new CarreraInscriptosResponseDTO((Long) result[0], (String) result[1], (Long) result[2]))
-//                .toList();
+    }
+
+    public List<CarreraResponseReporteDTO> reporte() {
+        List<CarreraResponseReporteDTO> results = this.carreraRepository.reporte()
+                .stream().map(item -> {
+                    String nombre = (String) item[0];
+                    Integer anio = ((Number) item[1]).intValue();
+                    Integer inscriptos = ((Number) item[2]).intValue();
+                    Integer graduados = ((Number) item[3]).intValue();
+                    CarreraResponseReporteDTO cr = new CarreraResponseReporteDTO(nombre, anio, inscriptos, graduados);
+                    return cr;
+                }).toList();
+        System.out.println(results);
+        return  results;
 
     }
 }
