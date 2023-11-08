@@ -11,8 +11,8 @@ import tudai.tp3arqui.model.Matricula;
 public class MatriculaResponseDTO {
 
     private final  Long id;
-    private final  Carrera carrera;
-    private Estudiante estudiante;
+    private final  CarreraResponseDTO carrera;
+    private EstudianteResponseDTO estudiante;
     private final int inscripcion;
     private final  int graduacion;
     private final int antiguedad;
@@ -27,10 +27,10 @@ public class MatriculaResponseDTO {
     }
 
 
-    public MatriculaResponseDTO(Matricula matriculacion) {
+    public MatriculaResponseDTO(CarreraResponseDTO c, EstudianteResponseDTO e, Matricula matriculacion) {
+        this.carrera = c;
+        this.estudiante = e;
         this.id = matriculacion.getId();
-        this.carrera = matriculacion.getCarrera();
-        this.estudiante = matriculacion.getEstudiante();
         this.inscripcion = matriculacion.getInscripcion();
         this.graduacion = matriculacion.getGraduacion();
         this.antiguedad = matriculacion.getAntiguedad();

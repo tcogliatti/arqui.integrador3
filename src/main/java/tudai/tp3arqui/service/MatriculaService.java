@@ -5,9 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tudai.tp3arqui.dto.requests.MatriculaRequestDTO;
+import tudai.tp3arqui.dto.responses.CarreraResponseDTO;
+import tudai.tp3arqui.dto.responses.EstudianteResponseDTO;
 import tudai.tp3arqui.dto.responses.MatriculaResponseDTO;
 import tudai.tp3arqui.exceptions.NotFoundEntity;
+import tudai.tp3arqui.model.Carrera;
+import tudai.tp3arqui.model.Estudiante;
 import tudai.tp3arqui.model.Matricula;
+import tudai.tp3arqui.repository.CarreraRepository;
+import tudai.tp3arqui.repository.EstudianteRepository;
 import tudai.tp3arqui.repository.MatriculaRepository;
 
 import java.util.List;
@@ -17,26 +23,61 @@ import java.util.List;
 public class MatriculaService {
 
     @Autowired
-    private MatriculaRepository matriculaRepository;
+    private final MatriculaRepository matriculaRepository;
 
+    @Autowired
+    private final CarreraRepository cr;
+
+    @Autowired
+    private final EstudianteRepository er;
 
     @Transactional(readOnly = true)
     public List<MatriculaResponseDTO> findAll() {
-        List<MatriculaResponseDTO> results = this.matriculaRepository.findAll().stream().map(MatriculaResponseDTO::new).toList();
+        List<MatriculaResponseDTO> results = this.matriculaRepository.findAll().
+                stream().map(mat -> {
+                    Carrera c = this.cr.findById(mat.getCarrera().getIdCarrera()).orElseThrow( () -> new NotFoundEntity( "Carrera" , mat.getCarrera().getIdCarrera()));
+                    Estudiante e = this.er.findById(mat.getEstudiante().getDni()).orElseThrow( () -> new NotFoundEntity("Estudiante", mat.getEstudiante().getDni()));
+                    MatriculaResponseDTO resp = new MatriculaResponseDTO(
+                        new CarreraResponseDTO(c),
+                        new EstudianteResponseDTO(e),
+                        mat
+                    );
+                    return resp;
+                }).toList();
         return results;
     }
 
     public MatriculaResponseDTO findById(Long id) {
         return this.matriculaRepository.findById(id)
-                .map(MatriculaResponseDTO::new)
-                .orElseThrow( () -> new NotFoundEntity( "Matricula" , id));
+                .map(mat -> {
+                    Carrera c = this.cr.findById(mat.getCarrera().getIdCarrera()).orElseThrow(() -> new NotFoundEntity("Carrera", mat.getCarrera().getIdCarrera()));
+                    Estudiante e = this.er.findById(mat.getEstudiante().getDni()).orElseThrow(() -> new NotFoundEntity("Estudiante", mat.getEstudiante().getDni()));
+                    MatriculaResponseDTO resp = new MatriculaResponseDTO(
+                            new CarreraResponseDTO(c),
+                            new EstudianteResponseDTO(e),
+                            mat
+                    );
+                    return resp;
+                }).orElseThrow( () -> new NotFoundEntity( "Matricula" , id));
     }
 
     @Transactional
     public MatriculaResponseDTO save(MatriculaRequestDTO request) {
-        final var matriculacion = new Matricula(request);
+        Carrera c = this.cr.findById(request.getCarrera()).orElseThrow( () -> new NotFoundEntity( "Carrera" , request.getCarrera()));
+        Estudiante e = this.er.findById(request.getEstudiante()).orElseThrow( () -> new NotFoundEntity("Estudiante", request.getEstudiante()));
+        final var matriculacion = new Matricula(
+                c,
+                e,
+                request.getInscripcion(),
+                request.getGraduacion(),
+                request.getAntiguedad()
+        );
         final var result = this.matriculaRepository.save(matriculacion);
-        return new MatriculaResponseDTO(result.getId(), result.getCarrera(), result.getInscripcion(),result.getGraduacion(), result.getAntiguedad());
+        return new MatriculaResponseDTO(
+                new CarreraResponseDTO(c),
+                new EstudianteResponseDTO(e),
+                matriculacion
+        );
     }
 
 

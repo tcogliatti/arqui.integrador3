@@ -14,10 +14,10 @@ import tudai.tp3arqui.model.Estudiante;
 @JsonIgnoreProperties
 public class MatriculaRequestDTO {
 
-    @NotNull(message = "Nombre estudiante es un campo obligatorio")
-    @NotEmpty(message ="Nombre estudiante es un campo obligatorio")
-    private Carrera carrera;
-    private Estudiante estudiante;
+//    @NotNull(message = "Nombre estudiante es un campo obligatorio")
+//    @NotEmpty(message ="Nombre estudiante es un campo obligatorio")
+    private Long carrera;
+    private Long estudiante;
     private int inscripcion;
     private int graduacion;
     private int antiguedad;
