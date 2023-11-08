@@ -1,5 +1,6 @@
 package tudai.tp3arqui.controller;
 
+import tudai.tp3arqui.dto.responses.CarreraInscriptosResponseDTO;
 import tudai.tp3arqui.service.CarreraService;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class CarreraController {
     @GetMapping("/{idCarrera}")
     public CarreraResponseDTO findById(@PathVariable Long idCarrera){
         return this.carreraService.findByIdCarrera(idCarrera);
+    }
+
+    @GetMapping("/cantidadInsciptos")
+    public List<CarreraInscriptosResponseDTO> getCantInscriptosPorCarrera(){
+        return this.carreraService.getCantInscriptosPorCarrera();
     }
 
 
