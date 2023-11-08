@@ -35,6 +35,10 @@ public class EstudianteController {
     public List<EstudianteResponseDTO> findByGenero(@PathVariable String genero) {
         return this.estudianteService.findByGenero(genero);
     }
+    @GetMapping("/porCarrera/{idCarrera}/ciudad/{ciudad}")
+    public List<EstudianteResponseDTO> findByGenero(@PathVariable Long idCarrera, @PathVariable String ciudad) {
+        return this.estudianteService.findByCarreraAndCiudad(idCarrera, ciudad);
+    }
 
     @GetMapping("/libreta/{lu}")
     public EstudianteResponseDTO findByLu(@PathVariable int lu) {

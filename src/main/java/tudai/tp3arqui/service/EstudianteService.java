@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tudai.tp3arqui.dto.requests.EstudianteRequestDTO;
 import tudai.tp3arqui.dto.responses.EstudianteResponseDTO;
 import tudai.tp3arqui.exceptions.NotFoundEntity;
+import tudai.tp3arqui.model.Carrera;
 import tudai.tp3arqui.model.Estudiante;
+import tudai.tp3arqui.repository.CarreraRepository;
 import tudai.tp3arqui.repository.EstudianteRepository;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class EstudianteService {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
+
+    @Autowired
+    private final CarreraRepository cr;
 
     @Transactional(readOnly = true)
     public List<EstudianteResponseDTO> findAll() {
@@ -66,5 +71,10 @@ public class EstudianteService {
     @Transactional
     public void delete(Long dni){
         this.estudianteRepository.deleteById(dni);
+    }
+
+    public List<EstudianteResponseDTO> findByCarreraAndCiudad(Long idCarrera, String direccion) {
+        Carrera inscripciones = this.cr.findById(idCarrera).orElseThrow( () -> new NotFoundEntity( "Carrera" , idCarrera));
+        return this.estudianteRepository.findByInscripcionesAndDireccion(inscripciones, direccion).stream().map(EstudianteResponseDTO::new).toList();
     }
 }
