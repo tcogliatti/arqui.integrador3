@@ -33,6 +33,18 @@ public class EstudianteService {
                 .map(EstudianteResponseDTO::new)
                 .orElseThrow(() -> new NotFoundEntity("Estudiante", dni));
     }
+    public EstudianteResponseDTO findByLu(int lu) {
+        Estudiante result = this.estudianteRepository.findByLu(lu);
+        return new EstudianteResponseDTO(
+                result.getLu(),
+                result.getDni(),
+                result.getNombre(),
+                result.getApellido(),
+                result.getEdad(),
+                result.getGenero(),
+                result.getDireccion()
+        );
+    }
     public List<EstudianteResponseDTO> findByGenero(String genero) {
         return this.estudianteRepository.findByGenero(genero).stream().map(EstudianteResponseDTO::new).toList();
     }

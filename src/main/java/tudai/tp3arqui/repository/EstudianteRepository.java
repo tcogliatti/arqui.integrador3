@@ -12,5 +12,6 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Long> {
     @Query("SELECT e FROM Estudiante e WHERE LOWER(e.genero) LIKE LOWER(:genero)")
     public List<Estudiante> findByGenero(String genero);
 
+    Estudiante findByLu(int lu);
 }
 

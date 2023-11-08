@@ -50,11 +50,11 @@ public class MatriculaService {
     public MatriculaResponseDTO findById(Long id) {
         return this.matriculaRepository.findById(id)
                 .map(mat -> {
-                    Carrera c = this.cr.findById(mat.getCarrera().getIdCarrera()).orElseThrow(() -> new NotFoundEntity("Carrera", mat.getCarrera().getIdCarrera()));
-                    Estudiante e = this.er.findById(mat.getEstudiante().getDni()).orElseThrow(() -> new NotFoundEntity("Estudiante", mat.getEstudiante().getDni()));
+//                    Carrera c = this.cr.findById(mat.getCarrera().getIdCarrera()).orElseThrow(() -> new NotFoundEntity("Carrera", mat.getCarrera().getIdCarrera()));
+//                    Estudiante e = this.er.findById(mat.getEstudiante().getDni()).orElseThrow(() -> new NotFoundEntity("Estudiante", mat.getEstudiante().getDni()));
                     MatriculaResponseDTO resp = new MatriculaResponseDTO(
-                            new CarreraResponseDTO(c),
-                            new EstudianteResponseDTO(e),
+                            new CarreraResponseDTO(mat.getCarrera()),
+                            new EstudianteResponseDTO(mat.getEstudiante()),
                             mat
                     );
                     return resp;

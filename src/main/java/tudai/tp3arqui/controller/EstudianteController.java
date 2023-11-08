@@ -22,35 +22,41 @@ public class EstudianteController {
     private EstudianteService estudianteService;
 
     @GetMapping("")
-    public List<EstudianteResponseDTO> findAll(){
+    public List<EstudianteResponseDTO> findAll() {
         return this.estudianteService.findAll();
     }
 
     @GetMapping("/{dni}")
-    public EstudianteResponseDTO findByDni(@PathVariable Long dni){
-        return  this.estudianteService.findByDni(dni);
+    public EstudianteResponseDTO findByDni(@PathVariable Long dni) {
+        return this.estudianteService.findByDni(dni);
     }
 
     @GetMapping("/findByGenero/{genero}")
-    public List<EstudianteResponseDTO> findByGenero(@PathVariable String genero){
-        return  this.estudianteService.findByGenero(genero);
+    public List<EstudianteResponseDTO> findByGenero(@PathVariable String genero) {
+        return this.estudianteService.findByGenero(genero);
+    }
+
+    @GetMapping("/libreta/{lu}")
+    public EstudianteResponseDTO findByLu(@PathVariable int lu) {
+        return this.estudianteService.findByLu(lu);
     }
 
     @PostMapping("")
-    public ResponseEntity<EstudianteResponseDTO> save(@RequestBody @Validated EstudianteRequestDTO request){
+    public ResponseEntity<EstudianteResponseDTO> save(@RequestBody @Validated EstudianteRequestDTO request) {
         System.out.println(request);
-        final var result =  this.estudianteService.save(request);
+        final var result = this.estudianteService.save(request);
         return ResponseEntity.accepted().body(result);
     }
 
     @PutMapping("/{dni}")
-    public ResponseEntity<EstudianteResponseDTO> update(@RequestBody @Validated EstudianteRequestDTO request){
+    public ResponseEntity<EstudianteResponseDTO> update(@RequestBody @Validated EstudianteRequestDTO request) {
         System.out.println(request);
-        final var result =  this.estudianteService.save(request);
+        final var result = this.estudianteService.save(request);
         return ResponseEntity.accepted().body(result);
     }
+
     @DeleteMapping("/{dni}")
-    public void delete(@PathVariable Long dni){
+    public void delete(@PathVariable Long dni) {
         this.estudianteService.delete(dni);
     }
 }
