@@ -80,7 +80,7 @@ public class CarreraService {
         for (CarreraReporteGraduadoResponseDTO graduado : graduadosList) {
             String carrera = graduado.getNombre();
             int anio = graduado.getAnio();
-            mapaCombinado.computeIfAbsent(carrera, k -> new HashMap<>())
+            mapaCombinado.computeIfAbsent(carrera, k -> new TreeMap<>())
                     .put(anio, new CarreraReporteResponseDTO(carrera, anio, 0, graduado.getGraduados()));
         }
 
@@ -88,7 +88,7 @@ public class CarreraService {
         for (CarreraReporteInscriptoResponseDTO inscripto : inscriptosList) {
             String carrera = inscripto.getNombre();
             int anio = inscripto.getAnio();
-            mapaCombinado.computeIfAbsent(carrera, k -> new HashMap<>())
+            mapaCombinado.computeIfAbsent(carrera, k -> new TreeMap<>())
                     .merge(anio, new CarreraReporteResponseDTO(carrera, anio, inscripto.getInscriptos(), 0),
                             (existing, additional) -> {
                                 existing.setInscriptos(additional.getInscriptos());
