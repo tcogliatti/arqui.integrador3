@@ -10,8 +10,8 @@ import lombok.Data;
 @JsonIgnoreProperties
 public class CarreraRequestDTO {
 
-    @NotNull(message = "Nombre de carrera es un campo obligatorio")
-    @NotEmpty(message ="Nombre de carrera es un campo obligatorio")
+   // @NotNull(message = "Nombre de carrera es un campo obligatorio")
+    //@NotEmpty(message ="Nombre de carrera es un campo obligatorio")
     private Long idCarrera;
     private String nombre;
     private int duracion;
