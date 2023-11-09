@@ -10,10 +10,7 @@ import tudai.tp3arqui.exceptions.NotFoundEntity;
 import tudai.tp3arqui.model.Carrera;
 import tudai.tp3arqui.repository.CarreraRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("CarreraService")
 @RequiredArgsConstructor
@@ -104,7 +101,8 @@ public class CarreraService {
         for (Map<Integer, CarreraReporteResponseDTO> aniosMap : mapaCombinado.values()) {
             resultado.addAll(aniosMap.values());
         }
-
+        // Ordenar la lista final en orden alfabético por nombre de carrera
+        resultado.sort(Comparator.comparing(CarreraReporteResponseDTO::getNombre));
         return resultado;
     }
 }
