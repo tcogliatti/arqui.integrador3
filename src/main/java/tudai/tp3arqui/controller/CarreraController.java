@@ -29,7 +29,7 @@ public class CarreraController {
         return this.carreraService.findByIdCarrera(idCarrera);
     }
 
-    @GetMapping("/cantidadInsciptos")
+    @GetMapping("/cantidadInscriptos")
     public List<CarreraInscriptosResponseDTO> getCantInscriptosPorCarrera(){
         return this.carreraService.getCantInscriptosPorCarrera();
     }

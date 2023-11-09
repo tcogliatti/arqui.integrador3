@@ -36,7 +36,7 @@ public class EstudianteController {
         return this.estudianteService.findByGenero(genero);
     }
     @GetMapping("/porCarrera/{idCarrera}/ciudad/{ciudad}")
-    public List<EstudianteResponseDTO> findByGenero(@PathVariable Long idCarrera, @PathVariable String ciudad) {
+    public List<EstudianteResponseDTO> findByCarreraAndCiudad(@PathVariable Long idCarrera, @PathVariable String ciudad) {
         return this.estudianteService.findByCarreraAndCiudad(idCarrera, ciudad);
     }
 
