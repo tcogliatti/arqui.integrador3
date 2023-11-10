@@ -1,0 +1,28 @@
+GUIA PARA LA CONSULTA EN POSTMAN POR CONSIGNA
+
+a) dar de alta un estudiante
+	Estudiante- POST Save
+
+b) matricular un estudiante en una carrera
+	Matricula- POST save
+
+c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
+	Estudiante- GET FindAll
+
+d) recuperar un estudiante, en base a su número de libreta universitaria.
+	Estudiante- GET FindByLU
+
+e) recuperar todos los estudiantes, en base a su género.
+	Estudiante- GET FindByGenero
+
+f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+	Carrera- GET GetCantInscriptosPorCarrera
+
+g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia
+	Estudiante- GET FindByCarreraAndCiudad
+
+h) generar un reporte de las carreras, que para cada carrera incluya información de los
+inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y
+presentar los años de manera cronológica.
+	Carrera- POST Reporte
+

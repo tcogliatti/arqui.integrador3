@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "2a0715d3-e6cb-4932-bb78-c749d4d2039a",
+		"name": "ArquiIntegrador3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30795551"
+	},
+	"item": [
+		{
+			"name": "Carreras",
+			"item": [
+				{
+					"name": "GetCarreras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/carreras"
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/carreras/{{IdCarrera}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GetCantInscriptosPorCarrera",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/carreras/cantidadInscriptos"
+					},
+					"response": []
+				},
+				{
+					"name": "reporte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/carreras/reporte"
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCarrera\": 123, // Reemplaza 123 con el valor que desees\r\n  \"nombre\": \"Nombre de la Carrera\", // Reemplaza \"Nombre de la Carrera\" con el nombre que desees\r\n  \"duracion\": 4 // Reemplaza 4 con la duración que desees\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlAPI}}/api/carreras"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estudiantes",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes"
+					},
+					"response": []
+				},
+				{
+					"name": "FindByDNI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes/{{dniEstudiante}}"
+					},
+					"response": []
+				},
+				{
+					"name": "FindByGenero",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes/findByGenero/{{generoEstudiante}}"
+					},
+					"response": []
+				},
+				{
+					"name": "FindByCarreraAndCiudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes/porCarrera/{{IdCarrera}}/ciudad/{{ciudad}}"
+					},
+					"response": []
+				},
+				{
+					"name": "FindByLU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes/libreta/{{LuEstudiante}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lu\": 123,\r\n  \"dni\": 4567890,\r\n  \"nombre\": \"Agustina\",\r\n  \"apellido\": \"Di Tommaso\",\r\n  \"edad\": 27,\r\n  \"genero\": \"Female\",\r\n  \"direccion\": \"Olavarria\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlAPI}}/api/estudiantes"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{urlAPI}}/api/estudiantes/4567890"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Matricula",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{urlAPI}}/api/matriculas"
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"carrera\": 1,\r\n  \"estudiante\": 23862520,\r\n  \"inscripcion\": 2020,\r\n  \"graduacion\": 2024,\r\n  \"antiguedad\": 4\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{urlAPI}}/api/matriculas"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "urlAPI",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "IdCarrera",
+			"value": "2"
+		},
+		{
+			"key": "dniEstudiante",
+			"value": "17331470"
+		},
+		{
+			"key": "generoEstudiante",
+			"value": "female"
+		},
+		{
+			"key": "ciudad",
+			"value": "Idvor"
+		},
+		{
+			"key": "LuEstudiante",
+			"value": "25789"
+		},
+		{
+			"key": "idMatricula",
+			"value": "1"
+		}
+	]
+}
