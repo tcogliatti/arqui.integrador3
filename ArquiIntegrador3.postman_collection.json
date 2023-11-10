@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idCarrera\": 123, // Reemplaza 123 con el valor que desees\r\n  \"nombre\": \"Nombre de la Carrera\", // Reemplaza \"Nombre de la Carrera\" con el nombre que desees\r\n  \"duracion\": 4 // Reemplaza 4 con la duración que desees\r\n}\r\n",
+							"raw": "{\r\n  \"idCarrera\": 123, \r\n  \"nombre\": \"Ingles\",\r\n  \"duracion\": 4\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -149,7 +149,8 @@
 					"name": "FindAll",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{urlAPI}}/api/matriculas"
 					},
 					"response": []
 				},
@@ -158,7 +159,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{urlAPI}}/api/matriculas"
+						"url": "{{urlAPI}}/api/matriculas/{{idMatricula}}"
 					},
 					"response": []
 				},
